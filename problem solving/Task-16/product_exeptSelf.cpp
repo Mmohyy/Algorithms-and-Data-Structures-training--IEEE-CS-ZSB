@@ -1,0 +1,41 @@
+//problem link: leetcode.com/problems/product-of-array-except-self/
+
+#include <iostream>
+#include<vector>
+#include<algorithm>
+#include<bits/stdc++.h>
+#include<stdbool.h>
+#include<set>
+#include<map>
+#include<unordered_set>
+#include<unordered_map>
+using namespace std;
+
+vector<int> productExceptSelf(vector<int>& nums) {
+    int n = nums.size();
+    vector<int> result(n, 1);
+
+    int prefix = 1;
+    for (int i = 0; i < n; i++) {
+        result[i] = prefix;
+        prefix *= nums[i];
+    }
+
+    int postfix = 1;
+    for (int i = n - 1; i >= 0; i--) {
+        result[i] *= postfix;
+        postfix *= nums[i];
+    }
+    return result;
+}
+int main(){
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    for(int i = 0; i < n; i++)
+        cin>>v[i];
+
+    vector<int> res = productExceptSelf(v);
+    for(int i = 0; i < res.size(); i++)
+        cout << res[i] << '\t';
+}
